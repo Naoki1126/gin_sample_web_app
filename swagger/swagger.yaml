@@ -1,8 +1,7 @@
----
 swagger: '2.0'
 info:
   version: 1.0.0
-  title: Greeting Server
+  title: gin_sample_web_app
 paths:
   /hello:
     get:
