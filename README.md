@@ -9,7 +9,9 @@ https://qiita.com/hyo_07/items/59c093dda143325b1859<br>
 https://zenn.dev/ajapa/articles/65b9934db18396
 
 #### go-swaggerの使い方
+##### Hello-worldの出力
 https://future-architect.github.io/articles/20200824/
 
+#### RoutingやModelも一気に生成する
 https://qiita.com/o_tyazuke/items/43bd362e8e427aa0e340
 
