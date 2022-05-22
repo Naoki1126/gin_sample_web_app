@@ -10,6 +10,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/runtime/middleware"
 
+	"gin_sample_web_app/handler"
 	"gin_sample_web_app/server"
 	"gin_sample_web_app/server/gen/restapi/gin_sample_web_app"
 )
@@ -40,11 +41,14 @@ func configureAPI(api *gin_sample_web_app.GinSampleWebAppAPI) http.Handler {
 
 	api.GetGreetingHandler = gin_sample_web_app.GetGreetingHandlerFunc(server.GetGreeting)
 
-	if api.GetGreetingHandler == nil {
-		api.GetGreetingHandler = gin_sample_web_app.GetGreetingHandlerFunc(func(params gin_sample_web_app.GetGreetingParams) middleware.Responder {
-			return middleware.NotImplemented("operation gin_sample_web_app.GetGreeting has not yet been implemented")
-		})
-	}
+	api.GetUserByIDHandler = gin_sample_web_app.GetUserByIDHandlerFunc(func(params gin_sample_web_app.GetUserByIDParams) middleware.Responder {
+		h := handler.GetUserByIDHandler{}
+		return h.Handle(params)
+	})
+	api.PostUserHandler = gin_sample_web_app.PostUserHandlerFunc(func(params gin_sample_web_app.PostUserParams) middleware.Responder {
+		h := handler.PostUserHandler{}
+		return h.Handle(params)
+	})
 
 	api.PreServerShutdown = func() {}
 
