@@ -10,6 +10,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/runtime/middleware"
 
+	"gin_sample_web_app/server"
 	"gin_sample_web_app/server/gen/restapi/gin_sample_web_app"
 )
 
@@ -36,6 +37,8 @@ func configureAPI(api *gin_sample_web_app.GinSampleWebAppAPI) http.Handler {
 	api.JSONConsumer = runtime.JSONConsumer()
 
 	api.TxtProducer = runtime.TextProducer()
+
+	api.GetGreetingHandler = gin_sample_web_app.GetGreetingHandlerFunc(server.GetGreeting)
 
 	if api.GetGreetingHandler == nil {
 		api.GetGreetingHandler = gin_sample_web_app.GetGreetingHandlerFunc(func(params gin_sample_web_app.GetGreetingParams) middleware.Responder {
