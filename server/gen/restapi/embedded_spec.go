@@ -23,6 +23,7 @@ func init() {
     "title": "gin_sample_web_app",
     "version": "1.0.0"
   },
+  "basePath": "/api",
   "paths": {
     "/hello": {
       "get": {
@@ -48,6 +49,61 @@ func init() {
           }
         }
       }
+    },
+    "/users": {
+      "post": {
+        "operationId": "postUser",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        }
+      }
+    },
+    "/users/{id}": {
+      "get": {
+        "operationId": "getUserById",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "User": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "number",
+          "format": "uint"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
     }
   }
 }`))
@@ -57,6 +113,7 @@ func init() {
     "title": "gin_sample_web_app",
     "version": "1.0.0"
   },
+  "basePath": "/api",
   "paths": {
     "/hello": {
       "get": {
@@ -80,6 +137,61 @@ func init() {
               "type": "string"
             }
           }
+        }
+      }
+    },
+    "/users": {
+      "post": {
+        "operationId": "postUser",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        }
+      }
+    },
+    "/users/{id}": {
+      "get": {
+        "operationId": "getUserById",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "User": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "number",
+          "format": "uint"
+        },
+        "name": {
+          "type": "string"
         }
       }
     }

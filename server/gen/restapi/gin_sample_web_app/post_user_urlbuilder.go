@@ -11,19 +11,15 @@ import (
 	golangswaggerpaths "path"
 )
 
-// GetGreetingURL generates an URL for the get greeting operation
-type GetGreetingURL struct {
-	Name *string
-
+// PostUserURL generates an URL for the post user operation
+type PostUserURL struct {
 	_basePath string
-	// avoid unkeyed usage
-	_ struct{}
 }
 
 // WithBasePath sets the base path for this url builder, only required when it's different from the
 // base path specified in the swagger spec.
 // When the value of the base path is an empty string
-func (o *GetGreetingURL) WithBasePath(bp string) *GetGreetingURL {
+func (o *PostUserURL) WithBasePath(bp string) *PostUserURL {
 	o.SetBasePath(bp)
 	return o
 }
@@ -31,15 +27,15 @@ func (o *GetGreetingURL) WithBasePath(bp string) *GetGreetingURL {
 // SetBasePath sets the base path for this url builder, only required when it's different from the
 // base path specified in the swagger spec.
 // When the value of the base path is an empty string
-func (o *GetGreetingURL) SetBasePath(bp string) {
+func (o *PostUserURL) SetBasePath(bp string) {
 	o._basePath = bp
 }
 
 // Build a url path and query string
-func (o *GetGreetingURL) Build() (*url.URL, error) {
+func (o *PostUserURL) Build() (*url.URL, error) {
 	var _result url.URL
 
-	var _path = "/hello"
+	var _path = "/users"
 
 	_basePath := o._basePath
 	if _basePath == "" {
@@ -47,23 +43,11 @@ func (o *GetGreetingURL) Build() (*url.URL, error) {
 	}
 	_result.Path = golangswaggerpaths.Join(_basePath, _path)
 
-	qs := make(url.Values)
-
-	var nameQ string
-	if o.Name != nil {
-		nameQ = *o.Name
-	}
-	if nameQ != "" {
-		qs.Set("name", nameQ)
-	}
-
-	_result.RawQuery = qs.Encode()
-
 	return &_result, nil
 }
 
 // Must is a helper function to panic when the url builder returns an error
-func (o *GetGreetingURL) Must(u *url.URL, err error) *url.URL {
+func (o *PostUserURL) Must(u *url.URL, err error) *url.URL {
 	if err != nil {
 		panic(err)
 	}
@@ -74,17 +58,17 @@ func (o *GetGreetingURL) Must(u *url.URL, err error) *url.URL {
 }
 
 // String returns the string representation of the path with query string
-func (o *GetGreetingURL) String() string {
+func (o *PostUserURL) String() string {
 	return o.Must(o.Build()).String()
 }
 
 // BuildFull builds a full url with scheme, host, path and query string
-func (o *GetGreetingURL) BuildFull(scheme, host string) (*url.URL, error) {
+func (o *PostUserURL) BuildFull(scheme, host string) (*url.URL, error) {
 	if scheme == "" {
-		return nil, errors.New("scheme is required for a full url on GetGreetingURL")
+		return nil, errors.New("scheme is required for a full url on PostUserURL")
 	}
 	if host == "" {
-		return nil, errors.New("host is required for a full url on GetGreetingURL")
+		return nil, errors.New("host is required for a full url on PostUserURL")
 	}
 
 	base, err := o.Build()
@@ -98,6 +82,6 @@ func (o *GetGreetingURL) BuildFull(scheme, host string) (*url.URL, error) {
 }
 
 // StringFull returns the string representation of a complete url
-func (o *GetGreetingURL) StringFull(scheme, host string) string {
+func (o *PostUserURL) StringFull(scheme, host string) string {
 	return o.Must(o.BuildFull(scheme, host)).String()
 }

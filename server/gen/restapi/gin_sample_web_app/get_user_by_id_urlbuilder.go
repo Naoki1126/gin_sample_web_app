@@ -9,11 +9,12 @@ import (
 	"errors"
 	"net/url"
 	golangswaggerpaths "path"
+	"strings"
 )
 
-// GetGreetingURL generates an URL for the get greeting operation
-type GetGreetingURL struct {
-	Name *string
+// GetUserByIDURL generates an URL for the get user by Id operation
+type GetUserByIDURL struct {
+	ID string
 
 	_basePath string
 	// avoid unkeyed usage
@@ -23,7 +24,7 @@ type GetGreetingURL struct {
 // WithBasePath sets the base path for this url builder, only required when it's different from the
 // base path specified in the swagger spec.
 // When the value of the base path is an empty string
-func (o *GetGreetingURL) WithBasePath(bp string) *GetGreetingURL {
+func (o *GetUserByIDURL) WithBasePath(bp string) *GetUserByIDURL {
 	o.SetBasePath(bp)
 	return o
 }
@@ -31,15 +32,22 @@ func (o *GetGreetingURL) WithBasePath(bp string) *GetGreetingURL {
 // SetBasePath sets the base path for this url builder, only required when it's different from the
 // base path specified in the swagger spec.
 // When the value of the base path is an empty string
-func (o *GetGreetingURL) SetBasePath(bp string) {
+func (o *GetUserByIDURL) SetBasePath(bp string) {
 	o._basePath = bp
 }
 
 // Build a url path and query string
-func (o *GetGreetingURL) Build() (*url.URL, error) {
+func (o *GetUserByIDURL) Build() (*url.URL, error) {
 	var _result url.URL
 
-	var _path = "/hello"
+	var _path = "/users/{id}"
+
+	id := o.ID
+	if id != "" {
+		_path = strings.Replace(_path, "{id}", id, -1)
+	} else {
+		return nil, errors.New("id is required on GetUserByIDURL")
+	}
 
 	_basePath := o._basePath
 	if _basePath == "" {
@@ -47,23 +55,11 @@ func (o *GetGreetingURL) Build() (*url.URL, error) {
 	}
 	_result.Path = golangswaggerpaths.Join(_basePath, _path)
 
-	qs := make(url.Values)
-
-	var nameQ string
-	if o.Name != nil {
-		nameQ = *o.Name
-	}
-	if nameQ != "" {
-		qs.Set("name", nameQ)
-	}
-
-	_result.RawQuery = qs.Encode()
-
 	return &_result, nil
 }
 
 // Must is a helper function to panic when the url builder returns an error
-func (o *GetGreetingURL) Must(u *url.URL, err error) *url.URL {
+func (o *GetUserByIDURL) Must(u *url.URL, err error) *url.URL {
 	if err != nil {
 		panic(err)
 	}
@@ -74,17 +70,17 @@ func (o *GetGreetingURL) Must(u *url.URL, err error) *url.URL {
 }
 
 // String returns the string representation of the path with query string
-func (o *GetGreetingURL) String() string {
+func (o *GetUserByIDURL) String() string {
 	return o.Must(o.Build()).String()
 }
 
 // BuildFull builds a full url with scheme, host, path and query string
-func (o *GetGreetingURL) BuildFull(scheme, host string) (*url.URL, error) {
+func (o *GetUserByIDURL) BuildFull(scheme, host string) (*url.URL, error) {
 	if scheme == "" {
-		return nil, errors.New("scheme is required for a full url on GetGreetingURL")
+		return nil, errors.New("scheme is required for a full url on GetUserByIDURL")
 	}
 	if host == "" {
-		return nil, errors.New("host is required for a full url on GetGreetingURL")
+		return nil, errors.New("host is required for a full url on GetUserByIDURL")
 	}
 
 	base, err := o.Build()
@@ -98,6 +94,6 @@ func (o *GetGreetingURL) BuildFull(scheme, host string) (*url.URL, error) {
 }
 
 // StringFull returns the string representation of a complete url
-func (o *GetGreetingURL) StringFull(scheme, host string) string {
+func (o *GetUserByIDURL) StringFull(scheme, host string) string {
 	return o.Must(o.BuildFull(scheme, host)).String()
 }
