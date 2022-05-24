@@ -6,7 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func defineRoutes() *gin.Engine {
+func DefineRoutes() *gin.Engine {
 	router := gin.Default()
 	router.LoadHTMLGlob("templates/*.html")
 

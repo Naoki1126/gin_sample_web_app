@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"fmt"
 	"gin_sample_web_app/infrastructure/dbclient"
 	"strconv"
 
@@ -8,6 +9,7 @@ import (
 )
 
 func ShowAllTodo(ctx *gin.Context) {
+	dbclient.DbInit()
 	todos := dbclient.DbGetAll
 
 	ctx.HTML(200, "index.html", gin.H{
@@ -16,13 +18,17 @@ func ShowAllTodo(ctx *gin.Context) {
 }
 
 func InsertTodo(ctx *gin.Context) {
+	dbclient.DbInit()
 	text := ctx.PostForm("text")
 	status := ctx.PostForm("status")
 	dbclient.DbInsert(text, status)
+	fmt.Println(111111)
+	fmt.Println(ctx)
 	ctx.Redirect(302, "/")
 }
 
 func ShowOneTodo(ctx *gin.Context) {
+	dbclient.DbInit()
 	n := ctx.Param("id")
 	id, err := strconv.Atoi(n)
 	if err != nil {
@@ -33,6 +39,7 @@ func ShowOneTodo(ctx *gin.Context) {
 }
 
 func UpdateTodo(ctx *gin.Context) {
+	dbclient.DbInit()
 	n := ctx.Param("id")
 	id, err := strconv.Atoi(n)
 	if err != nil {
@@ -45,6 +52,7 @@ func UpdateTodo(ctx *gin.Context) {
 }
 
 func DeleteTodo(ctx *gin.Context) {
+	dbclient.DbInit()
 	n := ctx.Param("id")
 	id, err := strconv.Atoi(n)
 	if err != nil {
