@@ -1,12 +1,6 @@
 package main
 
-import (
-	"encoding/json"
-	"fmt"
-	"gin_sample_web_app/modules"
-	"log"
-	"time"
-)
+import "gin_sample_web_app/modules"
 
 func IsOne(i int) bool {
 	if i == 1 {
@@ -63,27 +57,31 @@ func main() {
 
 	// fmt.Println(modules.Average(s))
 
-	u := new(modules.User)
-	u.Id = 1
-	u.Name = "test User"
-	u.Email = "example@example.com"
-	u.Created = time.Now()
+	// u := new(modules.User)
+	// u.Id = 1
+	// u.Name = "test User"
+	// u.Email = "example@example.com"
+	// u.Created = time.Now()
 
-	bs, err := json.Marshal(u)
-	if err != nil {
-		log.Fatal(err)
-	}
+	// bs, err := json.Marshal(u)
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
 
-	fmt.Println(string(bs))
+	// fmt.Println(string(bs))
 
-	fmt.Printf("%T\n", bs)
+	// fmt.Printf("%T\n", bs)
 
-	u2 := new(modules.User)
+	// u2 := new(modules.User)
 
-	if err := json.Unmarshal(bs, &u2); err != nil {
-		fmt.Println(err)
-	}
+	// if err := json.Unmarshal(bs, &u2); err != nil {
+	// 	fmt.Println(err)
+	// }
 
-	fmt.Println(u2)
+	// fmt.Println(u2)
+
+	modules.PrintError(modules.DoError(modules.HOGEHOGE))
+	modules.PrintError(modules.DoError(modules.FUGAFUGA))
+	modules.PrintError(modules.DoError(modules.HOGEFUGA))
 
 }
