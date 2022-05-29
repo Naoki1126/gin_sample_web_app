@@ -80,8 +80,11 @@ func main() {
 
 	// fmt.Println(u2)
 
-	modules.PrintError(modules.DoError(modules.HOGEHOGE))
-	modules.PrintError(modules.DoError(modules.FUGAFUGA))
-	modules.PrintError(modules.DoError(modules.HOGEFUGA))
-
+	// modules.PrintError(modules.DoError(modules.HOGEHOGE))
+	// modules.PrintError(modules.DoError(modules.FUGAFUGA))
+	// modules.PrintError(modules.DoError(modules.HOGEFUGA))
+	// modules.CallPanic()
+	// modules.PanicTest()
+	// modules.RecoverPanic()
+	modules.RecoverPanicTestFunc()
 }
