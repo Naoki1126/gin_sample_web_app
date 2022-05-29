@@ -40,4 +40,12 @@ func main() {
 		fmt.Println(v.ToString())
 	}
 
+	err := modules.RaiseError()
+	fmt.Println(err.Error())
+
+	e, ok := err.(*modules.MyError)
+	if ok {
+		fmt.Println(e.ErrCode)
+	}
+
 }
