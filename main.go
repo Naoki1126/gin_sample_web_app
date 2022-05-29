@@ -1,8 +1,11 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"gin_sample_web_app/modules"
+	"log"
+	"time"
 )
 
 func IsOne(i int) bool {
@@ -39,25 +42,48 @@ func main() {
 
 	// log.Printf("&#v\n", res.Error())
 
-	vs := []modules.Stringfy{
-		&modules.Person{Name: "Taro", Age: 21},
-		&modules.Car{Number: "123345", Model: "111111"},
+	// vs := []modules.Stringfy{
+	// 	&modules.Person{Name: "Taro", Age: 21},
+	// 	&modules.Car{Number: "123345", Model: "111111"},
+	// }
+
+	// for _, v := range vs {
+	// 	fmt.Println(v.ToString())
+	// }
+
+	// err := modules.RaiseError()
+	// fmt.Println(err.Error())
+
+	// e, ok := err.(*modules.MyError)
+	// if ok {
+	// 	fmt.Println(e.ErrCode)
+	// }
+
+	// s := []int{2, 3, 4, 5, 6}
+
+	// fmt.Println(modules.Average(s))
+
+	u := new(modules.User)
+	u.Id = 1
+	u.Name = "test User"
+	u.Email = "example@example.com"
+	u.Created = time.Now()
+
+	bs, err := json.Marshal(u)
+	if err != nil {
+		log.Fatal(err)
 	}
 
-	for _, v := range vs {
-		fmt.Println(v.ToString())
+	fmt.Println(string(bs))
+
+	fmt.Printf("%T\n", bs)
+
+	u2 := new(modules.User)
+
+	if err := json.Unmarshal(bs, &u2); err != nil {
+		fmt.Println(err)
 	}
 
-	err := modules.RaiseError()
-	fmt.Println(err.Error())
-
-	e, ok := err.(*modules.MyError)
-	if ok {
-		fmt.Println(e.ErrCode)
-	}
-
-	s := []int{2, 3, 4, 5, 6}
-
-	fmt.Println(modules.Average(s))
+	fmt.Println(u2)
 
 }
