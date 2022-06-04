@@ -23,3 +23,23 @@ type Car struct {
 func (c *Car) ToString() string {
 	return fmt.Sprintf("Number=%v, Model=%v", c.Number, c.Model)
 }
+
+type TestOverRideInterFace interface {
+	error
+	ShowText() string
+	ShowNumber() int
+}
+
+func (c *Car) DoError() error {
+	return fmt.Errorf("Error")
+}
+
+func (c *Car) ShowText() string {
+	fmt.Println("aaaa")
+	return "test"
+}
+
+func (c *Car) ShowNumber() int {
+	fmt.Println("11111")
+	return 111
+}

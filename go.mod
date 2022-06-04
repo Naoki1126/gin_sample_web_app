@@ -45,6 +45,9 @@ require (
 	github.com/stretchr/testify v1.7.1 // indirect
 	github.com/ugorji/go/codec v1.1.7 // indirect
 	go.mongodb.org/mongo-driver v1.9.1 // indirect
+	go.uber.org/atomic v1.9.0 // indirect
+	go.uber.org/multierr v1.8.0 // indirect
+	go.uber.org/zap v1.21.0 // indirect
 	golang.org/x/crypto v0.0.0-20220411220226-7b82a4e95df4 // indirect
 	golang.org/x/sys v0.0.0-20220520151302-bc2c85ada10a // indirect
 	golang.org/x/xerrors v0.0.0-20220517211312-f3a8303e98df // indirect

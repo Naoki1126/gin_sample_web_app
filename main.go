@@ -1,6 +1,11 @@
 package main
 
-import "gin_sample_web_app/modules"
+import (
+	"fmt"
+	"gin_sample_web_app/modules"
+
+	"go.uber.org/zap"
+)
 
 func IsOne(i int) bool {
 	if i == 1 {
@@ -86,5 +91,32 @@ func main() {
 	// modules.CallPanic()
 	// modules.PanicTest()
 	// modules.RecoverPanic()
-	modules.RecoverPanicTestFunc()
+	// modules.RecoverPanicTestFunc()
+
+	c := modules.Car{
+		Number: "1111",
+		Model:  "11111111",
+	}
+
+	er := c.DoError()
+	switch e := er.(type) {
+	case modules.TestOverRideInterFace:
+		fmt.Print(1111)
+		fmt.Println(e)
+	default:
+		fmt.Println(11138)
+	}
+
+	fmt.Println(111)
+	err := modules.DoError(modules.HOGEHOGE)
+	// fmt.Println(err)
+	zap.S().Infof(
+		"test",
+		zap.Bool("success", false),
+		zap.String("method", "ttttt"),
+		zap.Error(err),
+	)
+	// logger, _ := zap.NewDevelopment()
+	// logger.Warn("Hello zap", zap.String("key", "value"), zap.Time("now", time.Now()))
+
 }
