@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 	"gin_sample_web_app/modules"
-	"os"
+	"strings"
 )
 
 func IsOne(i int) bool {
@@ -126,24 +126,29 @@ func main() {
 	// fmt.Println(f.Abs())
 	// fmt.Println(-math.Sqrt2)
 
-	v := modules.Vertex{3, 4}
-	v.Scale(10.3)
-	fmt.Println(v)
-	fmt.Println(v.Abs())
+	// v := modules.Vertex{3, 4}
+	// v.Scale(10.3)
+	// fmt.Println(v)
+	// fmt.Println(v.Abs())
 
-	f, err := os.Open("/tmp/hoge.txt")
-	if err != nil {
-		fmt.Println(111)
-		t := modules.TFuncHoge{Err: err}
-		switch e := t.Err.(type) {
-		case modules.TFunc:
-			fmt.Println(e)
-			fmt.Println("bbbbb")
-		default:
-			fmt.Println(e)
-			fmt.Println("aaaaaa")
-		}
+	// f, err := os.Open("/tmp/hoge.txt")
+	// if err != nil {
+	// 	fmt.Println(111)
+	// 	t := modules.TFuncHoge{Err: err}
+	// 	switch e := t.Err.(type) {
+	// 	case modules.TFunc:
+	// 		fmt.Println(e)
+	// 		fmt.Println("bbbbb")
+	// 	default:
+	// 		fmt.Println(e)
+	// 		fmt.Println("aaaaaa")
+	// 	}
 
-	}
-	fmt.Println(f)
+	// }
+	// fmt.Println(f)
+
+	m := modules.MyStringStruct{"bbbssaaa", "wwwbbbbbbp"}
+	fmt.Println(strings.Split(m.Y, "bbb"))
+	x := string(m.X)
+	fmt.Println(strings.Split(x, "s"))
 }

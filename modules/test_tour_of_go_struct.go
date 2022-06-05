@@ -1,6 +1,7 @@
 package modules
 
 import (
+	"fmt"
 	"math"
 )
 
@@ -24,4 +25,15 @@ func (f MyFloat) Abs() float64 {
 		return float64(-f)
 	}
 	return float64(f)
+}
+
+type MyString string
+
+type MyStringStruct struct {
+	X MyString
+	Y string
+}
+
+func (m MyStringStruct) MyStringFunc() {
+	fmt.Println(m.X)
 }
