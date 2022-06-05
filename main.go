@@ -3,8 +3,7 @@ package main
 import (
 	"fmt"
 	"gin_sample_web_app/modules"
-
-	"go.uber.org/zap"
+	"os"
 )
 
 func IsOne(i int) bool {
@@ -93,30 +92,58 @@ func main() {
 	// modules.RecoverPanic()
 	// modules.RecoverPanicTestFunc()
 
-	c := modules.Car{
-		Number: "1111",
-		Model:  "11111111",
-	}
+	// c := modules.Car{
+	// 	Number: "1111",
+	// 	Model:  "11111111",
+	// }
 
-	er := c.DoError()
-	switch e := er.(type) {
-	case modules.TestOverRideInterFace:
-		fmt.Print(1111)
-		fmt.Println(e)
-	default:
-		fmt.Println(11138)
-	}
+	// er := c.DoError()
+	// switch e := er.(type) {
+	// case modules.TestOverRideInterFace:
+	// 	fmt.Print(1111)
+	// 	fmt.Println(e)
+	// default:
+	// 	fmt.Println(11138)
+	// }
 
-	fmt.Println(111)
-	err := modules.DoError(modules.HOGEHOGE)
-	// fmt.Println(err)
-	zap.S().Infof(
-		"test",
-		zap.Bool("success", false),
-		zap.String("method", "ttttt"),
-		zap.Error(err),
-	)
+	// fmt.Println(111)
+	// err := modules.DoError(modules.HOGEHOGE)
+	// // fmt.Println(err)
+	// zap.S().Infof(
+	// 	"test",
+	// 	zap.Bool("success", false),
+	// 	zap.String("method", "ttttt"),
+	// 	zap.Error(err),
+	// )
 	// logger, _ := zap.NewDevelopment()
 	// logger.Warn("Hello zap", zap.String("key", "value"), zap.Time("now", time.Now()))
 
+	// v := modules.Vertex{1, 2}
+	// fmt.Println(v.Abs())
+
+	// var f modules.MyFloat
+	// f = -0.3333
+	// fmt.Println(f.Abs())
+	// fmt.Println(-math.Sqrt2)
+
+	v := modules.Vertex{3, 4}
+	v.Scale(10.3)
+	fmt.Println(v)
+	fmt.Println(v.Abs())
+
+	f, err := os.Open("/tmp/hoge.txt")
+	if err != nil {
+		fmt.Println(111)
+		t := modules.TFuncHoge{Err: err}
+		switch e := t.Err.(type) {
+		case modules.TFunc:
+			fmt.Println(e)
+			fmt.Println("bbbbb")
+		default:
+			fmt.Println(e)
+			fmt.Println("aaaaaa")
+		}
+
+	}
+	fmt.Println(f)
 }
