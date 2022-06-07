@@ -37,3 +37,20 @@ type MyStringStruct struct {
 func (m MyStringStruct) MyStringFunc() {
 	fmt.Println(m.X)
 }
+
+type MyInterFace interface {
+	GetInfo()
+}
+
+type BookDatabase struct {
+}
+
+func (b *BookDatabase) GetInfo() {
+	fmt.Println("book")
+}
+
+type Shop struct{}
+
+func (s *Shop) GetInfo() {
+	fmt.Println("show")
+}

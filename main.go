@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 	"gin_sample_web_app/modules"
-	"strings"
+	"reflect"
 )
 
 func IsOne(i int) bool {
@@ -147,8 +147,22 @@ func main() {
 	// }
 	// fmt.Println(f)
 
-	m := modules.MyStringStruct{"bbbssaaa", "wwwbbbbbbp"}
-	fmt.Println(strings.Split(m.Y, "bbb"))
-	x := string(m.X)
-	fmt.Println(strings.Split(x, "s"))
+	// m := modules.MyStringStruct{"bbbssaaa", "wwwbbbbbbp"}
+	// fmt.Println(strings.Split(m.Y, "bbb"))
+	// x := string(m.X)
+	// fmt.Println(strings.Split(x, "s"))
+
+	// _, err := os.Open("/tmp/hoge.txt")
+
+	// e := modules.BookDatabase{Err: err}
+	// _, ok := e.(modules.MyInterFace)
+	// if ok {
+	// 	fmt.Println(1)
+	// }
+
+	// var t modules.MyInterFace = &modules.BookDatabase{}
+	s := modules.Shop{}
+	tp := reflect.TypeOf(s)
+	fmt.Println(tp == reflect.TypeOf(modules.Shop{}))
+
 }
