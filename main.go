@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	"gin_sample_web_app/modules"
-	"reflect"
+	"gin_sample_web_app/infrastructure/dbclient"
+	"time"
 )
 
 func IsOne(i int) bool {
@@ -161,8 +161,28 @@ func main() {
 	// }
 
 	// var t modules.MyInterFace = &modules.BookDatabase{}
-	s := modules.Shop{}
-	tp := reflect.TypeOf(s)
-	fmt.Println(tp == reflect.TypeOf(modules.Shop{}))
+	// s := modules.Shop{}
+	// tp := reflect.TypeOf(s)
+	// fmt.Println(tp == reflect.TypeOf(modules.Shop{}))
+
+	db := dbclient.ConnectGorm()
+	defer db.Close()
+	db.Set("gorm:table_options", "ENGINE = InnoDB").AutoMigrate(&dbclient.User{})
+
+	// user1 := User{Name: "テスト1太郎", Age: 20, Sex: "男"}
+	// user2 := User{Name: "テスト二郎", Age: 25, Sex: "男"}
+	// insertUsers := []User{user1, user2}
+	// insert(insertUsers, db)
+	user1 := dbclient.User{
+		Name:         "test1",
+		Age:          20,
+		Sex:          "Man",
+		MessageToken: "aaaaaaa",
+	}
+	fmt.Println(user1)
+	time.Sleep(10 * time.Second)
+	user, err := dbclient.FindLast(db)
+	fmt.Println(user)
+	fmt.Println(err)
 
 }
