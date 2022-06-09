@@ -56,9 +56,10 @@ func FindLast(db *gorm.DB) (User, error) {
 	var user User
 	err := db.Last(&user).Error
 	if errors.Is(err, gorm.ErrRecordNotFound) {
-		fmt.Println("record is not found")
-		return user, err
+		fmt.Println("record not found")
+		return user, nil
 	}
 
+	// var user User
 	return user, nil
 }

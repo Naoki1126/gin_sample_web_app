@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"gin_sample_web_app/infrastructure/dbclient"
-	"time"
 )
 
 func IsOne(i int) bool {
@@ -180,7 +179,7 @@ func main() {
 		MessageToken: "aaaaaaa",
 	}
 	fmt.Println(user1)
-	time.Sleep(10 * time.Second)
+
 	user, err := dbclient.FindLast(db)
 	fmt.Println(user)
 	fmt.Println(err)
