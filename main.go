@@ -1,5 +1,10 @@
 package main
 
+import (
+	"fmt"
+	"gin_sample_web_app/infrastructure/dbclient"
+)
+
 func IsOne(i int) bool {
 	if i == 1 {
 		return true
@@ -193,4 +198,33 @@ func main() {
 	// now := time.Now()
 	// tt := reflect.TypeOf(now)
 	// fmt.Println(tt)
+
+	db := dbclient.ConnectGorm()
+	// u1 := dbclient.User{Name: "Taro", Age: 11}
+	// u2 := dbclient.User{Name: "Taro", Age: 12}
+	// u3 := dbclient.User{Name: "Taro", Age: 13}
+	// dbclient.Insert(u1, db)
+	// dbclient.Insert(u2, db)
+	// dbclient.Insert(u3, db)
+
+	// var users []dbclient.User
+	// db.Find(&users).Debug()
+	// for _, u := range users {
+	// 	fmt.Println(u.Name)
+	// }
+	var result dbclient.MysqlSumResult
+	// var user dbclient.User
+	fmt.Println(result.AgeSum)
+	// r, err := db.Debug().Model(user).Select("sum(age) as AgeSum").()
+	db.Table("users").Select("sum(age) as age_sum").Scan(&result)
+	fmt.Println(result.AgeSum)
+	// fmt.Println(r.Scan(&AgeSum))
+	// if err != nil {
+	// 	fmt.Println(err)
+	// }
+
+	// fmt.Println(r)
+
+	defer db.Close()
+
 }

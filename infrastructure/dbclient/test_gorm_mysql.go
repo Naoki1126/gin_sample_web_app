@@ -17,6 +17,10 @@ type User struct {
 	MessageToken string `gorm:"size:255"`
 }
 
+type MysqlSumResult struct {
+	AgeSum int
+}
+
 func (u User) String() string {
 	return fmt.Sprint("%s(%d)", u.Name, u.Age)
 }
@@ -29,13 +33,17 @@ const (
 	DBProtocol = "tcp(127.0.0.1:3306)"
 
 	DBName = "gin_sample_web_app"
+
+	Option = "parseTime=true"
 )
 
 func ConnectGorm() *gorm.DB {
-	connectTemplate := "%s@%s/%s"
-	connect := fmt.Sprintf(connectTemplate, DBUser, DBProtocol, DBName)
+	connectTemplate := "%s@%s/%s?%s"
+	connect := fmt.Sprintf(connectTemplate, DBUser, DBProtocol, DBName, Option)
 	db, err := gorm.Open(Dialect, connect)
+	// db.AutoMigrate(&User{})
 	if err != nil {
+		log.Println("Connected Error")
 		log.Println(err.Error())
 	}
 	return db
@@ -61,5 +69,6 @@ func FindLast(db *gorm.DB) (User, error) {
 	}
 
 	// var user User
+	fmt.Println(11)
 	return user, nil
 }
