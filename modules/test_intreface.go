@@ -25,7 +25,6 @@ func (c *Car) ToString() string {
 }
 
 type TestOverRideInterFace interface {
-	error
 	ShowText() string
 	ShowNumber() int
 }

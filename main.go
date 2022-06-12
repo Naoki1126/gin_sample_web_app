@@ -1,10 +1,5 @@
 package main
 
-import (
-	"fmt"
-	"gin_sample_web_app/infrastructure/dbclient"
-)
-
 func IsOne(i int) bool {
 	if i == 1 {
 		return true
@@ -164,24 +159,38 @@ func main() {
 	// tp := reflect.TypeOf(s)
 	// fmt.Println(tp == reflect.TypeOf(modules.Shop{}))
 
-	db := dbclient.ConnectGorm()
-	defer db.Close()
-	db.Set("gorm:table_options", "ENGINE = InnoDB").AutoMigrate(&dbclient.User{})
+	// db := dbclient.ConnectGorm()
+	// defer db.Close()
+	// db.Set("gorm:table_options", "ENGINE = InnoDB").AutoMigrate(&dbclient.User{})
 
-	// user1 := User{Name: "テスト1太郎", Age: 20, Sex: "男"}
-	// user2 := User{Name: "テスト二郎", Age: 25, Sex: "男"}
-	// insertUsers := []User{user1, user2}
-	// insert(insertUsers, db)
-	user1 := dbclient.User{
-		Name:         "test1",
-		Age:          20,
-		Sex:          "Man",
-		MessageToken: "aaaaaaa",
-	}
-	fmt.Println(user1)
+	// // user1 := User{Name: "テスト1太郎", Age: 20, Sex: "男"}
+	// // user2 := User{Name: "テスト二郎", Age: 25, Sex: "男"}
+	// // insertUsers := []User{user1, user2}
+	// // insert(insertUsers, db)
+	// user1 := dbclient.User{
+	// 	Name:         "test1",
+	// 	Age:          20,
+	// 	Sex:          "Man",
+	// 	MessageToken: "aaaaaaa",
+	// }
+	// fmt.Println(user1)
 
-	user, err := dbclient.FindLast(db)
-	fmt.Println(user)
-	fmt.Println(err)
+	// user, err := dbclient.FindLast(db)
+	// fmt.Println(user)
+	// fmt.Println(err)
 
+	// var i modules.TestOverRideInterFace
+
+	// c := modules.Car{"sssss", "dddd"}
+	// i = &c
+
+	// t, ok := i.(*modules.Car)
+	// fmt.Println(t)
+	// if ok {
+	// 	fmt.Println("ok")
+	// }
+
+	// now := time.Now()
+	// tt := reflect.TypeOf(now)
+	// fmt.Println(tt)
 }
