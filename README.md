@@ -21,4 +21,8 @@ https://qiita.com/nayuneko/items/3c0b3c0de9e8b27c9548
 ### Panic
 https://qiita.com/nayuneko/items/9534858156dfd50b43fb
 
+### gorm
+https://qiita.com/gold-kou/items/45a95d61d253184b0f33
+
+
 

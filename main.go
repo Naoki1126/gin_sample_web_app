@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"gin_sample_web_app/infrastructure/dbclient"
+	"gin_sample_web_app/sample"
 )
 
 func IsOne(i int) bool {
@@ -213,10 +214,10 @@ func main() {
 	// 	fmt.Println(u.Name)
 	// }
 	var result dbclient.MysqlSumResult
-	// var user dbclient.User
+	var user dbclient.User
 	fmt.Println(result.AgeSum)
 	// r, err := db.Debug().Model(user).Select("sum(age) as AgeSum").()
-	db.Table("users").Select("sum(age) as age_sum").Scan(&result)
+	db.Model(user).Select("sum(age) as age_sum").Scan(&result)
 	fmt.Println(result.AgeSum)
 	// fmt.Println(r.Scan(&AgeSum))
 	// if err != nil {
@@ -226,5 +227,48 @@ func main() {
 	// fmt.Println(r)
 
 	defer db.Close()
+
+	profile := sample.MyProfile{FirstName: "Tanaka", LastName: "takashi", Gender: "male", Birthday: "19990909"}
+	target := sample.TargetProfile{
+		FirstName: "target",
+		LastName:  "taro",
+		Gender:    "male",
+		Birthday:  "11111111",
+	}
+	var i1 interface{}
+	var i2 interface{}
+	i1 = profile
+	i2 = target
+
+	i3 := []sample.Human{&profile, &target}
+
+	for _, u := range i3 {
+		m := u.NickName()
+		fmt.Println(m)
+	}
+
+	_, ok := i1.(sample.MyProfile)
+	if ok {
+		fmt.Println("success")
+	}
+
+	_, ok2 := i2.(sample.TargetProfile)
+
+	if ok2 {
+		fmt.Println("success")
+	}
+
+	err := profile.OpenFile()
+	if err != nil {
+		fmt.Println(err)
+		// if errors.Is(err, &sample.MyProfile{}.Error()) {
+		// 	fmt.Println(11111)
+		// }
+	}
+
+	err2 := target.OpenFile()
+	if err2 != nil {
+		fmt.Println(err2)
+	}
 
 }
